@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
+  
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+    
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/responsive.css"  media="(min-width: 860px)">
+  
+  <title>Restaurant Reviews</title>
+</head>
+
+<body>
+  <header>
+    <div id="head">
+      <h1><a href="/">Restaurant Reviews</a></h1>
+    </div>
+  </header>
+
+  <main id="maincontent">
+
+    <section id="filters">
+      <div class="filter-options">
+        <div class="input-wrap">
+          <label for="neighborhoods-select">Neighborhood:</label>
+          <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
+            <option value="all">All</option>
+          </select>
+        </div>
+
+        <div class="input-wrap">
+          <label for="cuisines-select">Cuisines:</label>
+          <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()">
+            <option value="all">All</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section id="map-container">
+      <div id="map" role="application">
+        <button id="show-map-btn" onclick="startMap()">Show map</button>
+      </div>
+
+    </section>
+
+    <section id="results">
+      <div id="results-found-number"></div>
+      <ul id="restaurants-list"></ul>
+    </section>
+  </main>
+
+  <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
+  <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
+  <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRbr6-nwHrQTgfe-6AEHypQ8phwAHBbAk&libraries=places&callback=initMap"></script>
+
+  <script>
+    
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js');
+      });
+    }
+    
+  </script>
+
+
+  <footer id="footer">
+    Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
+  </footer>
+
+</body>
+
+</htmllang>

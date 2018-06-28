@@ -1,0 +1,74 @@
+@media only screen and (min-width:400px) {
+    #maincontent {
+        padding-top: 95px;
+    }
+}
+
+@media only screen and (min-width:992px) {
+    #map-container {
+        width: 40%;
+        position: fixed;
+        right: 0;
+        top: 100px;
+        height: calc(100vh - 91px);
+    }
+    #results {
+        width: 60%;
+    }
+    body,
+    html {
+        font-size: 16px;
+    }
+    #head {
+        padding: 10px 15px;
+    }
+    #filters {
+        top: 48px;
+    }
+    .filter-options {
+        padding: 5px 0;
+    }
+    #maincontent {
+        padding-top: 120px;
+    }
+}
+
+@media only screen and (min-width:1600px) {
+    #map-container {
+        width: 34%;
+    }
+    #results {
+        width: 66%;
+    }
+}
+
+@media only screen and (min-width:860px) {
+    #restaurant-container {
+        justify-content: flex-start;
+    }
+    .restaurant-details {
+        width: calc(50% - 40px);
+        margin-left: 40px;
+    }
+    #maincontent.restaurant-info #map-container {
+        width: 100%;
+        display: block;
+        position: relative;
+        margin-top: 20px;
+        top: auto;
+    }
+}
+
+@media only screen and (min-width:1170px) {
+    #maincontent.restaurant-info {
+        width: 1170px;
+        margin: 0 auto;
+    }
+    .breadcrumbs-wrap {
+        width: 1170px;
+        margin: 0 auto;
+    }
+    .breadcrumbs-wrap #breadcrumb {
+        padding-left: 0;
+    }
+}
