@@ -1,6 +1,6 @@
 {
     "name": "Restaurants reviews",
-    "short_name": "Restaurants reviews",
+    "short_name": "RR",
     "icons": [{
             "src": "/android-chrome-192x192.png",
             "sizes": "192x192",

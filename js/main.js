@@ -4,6 +4,9 @@ let restaurants,
 var map
 var markers = []
 
+//DBHelper.syncData()
+
+
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
@@ -151,40 +154,50 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
  * Create restaurant HTML.
  */
 createRestaurantHTML = (restaurant) => {
-  const li = document.createElement('li');
+  const detailsTemplate = document.getElementById("restaurant-listing-template");
+  const newLi = document.importNode(detailsTemplate.content, true);
 
   if (DBHelper.imageUrlForRestaurant(restaurant)) {
-    const image = document.createElement('img');
-    image.className = 'restaurant-img lazy';
+    const image = newLi.querySelector('img');
     const imageName = DBHelper.imageUrlForRestaurant(restaurant);
     image.dataset.src = imageName + ".jpg";
     image.dataset.srcset = imageName + "@2x.jpg 2x";
-    image.alt = "Image of " + restaurant.name;
-    li.append(image);
+    image.dataset.alt = "Image of " + restaurant.name;
   }
 
-  const wrapper = document.createElement('div');
-  wrapper.className = "restaurant-list-details";
-  li.append(wrapper);
-
-  const name = document.createElement('h2');
+  const name = newLi.querySelector('h2');
   name.innerHTML = restaurant.name;
-  wrapper.append(name);
 
-  const neighborhood = document.createElement('p');
+  const favStar = newLi.querySelector('.fav-star');
+  if (DBHelper.isFavourited(restaurant)) {
+    favStar.classList += " favourited";
+  }
+  favStar.addEventListener("click", toggleFavouriteRestaurant);
+  favStar.dataset.restaurantId = restaurant.id;
+
+  const neighborhood = newLi.querySelector('p.neighborhood');
   neighborhood.innerHTML = restaurant.neighborhood;
-  wrapper.append(neighborhood);
 
-  const address = document.createElement('p');
+  const address = newLi.querySelector('p.address');
   address.innerHTML = restaurant.address;
-  wrapper.append(address);
 
-  const more = document.createElement('a');
+  const more = newLi.querySelector('a');
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
-  wrapper.append(more)
 
-  return li
+  return newLi
+}
+
+
+function toggleFavouriteRestaurant(e) {
+  var restaurantId = e.path[1].dataset.restaurantId;
+  var restaurantAdded = DBHelper.toggleFavouriteRestaurant(restaurantId);
+
+  if (restaurantAdded === false) {
+    e.path[1].classList.remove("favourited");
+  } else {
+    e.path[1].classList += " favourited";
+  }
 }
 
 /**
@@ -196,7 +209,6 @@ createRestaurantHTML = (restaurant) => {
 
 lazyLoad = () => {
   var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
-
   if ("IntersectionObserver" in window) {
     let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
       entries.forEach(function (entry) {
@@ -204,6 +216,7 @@ lazyLoad = () => {
           let lazyImage = entry.target;
           lazyImage.src = lazyImage.dataset.src;
           lazyImage.srcset = lazyImage.dataset.srcset;
+          lazyImage.alt = lazyImage.dataset.alt;
           lazyImage.classList.remove("lazy");
           lazyImageObserver.unobserve(lazyImage);
         }

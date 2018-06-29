@@ -234,6 +234,7 @@ header {
   letter-spacing: 0;
   margin: 0.5em;
   padding: 5px 10px;
+  width: 130px;
 }
 
 .filter-options .input-wrap {
@@ -277,6 +278,8 @@ header {
   display: block;
   margin: 0;
   width: 100%;
+  min-height: 188px;
+  background-color: #C5C5C5;
 }
 
 #results-found-number {
@@ -301,6 +304,7 @@ header {
 
 #restaurants-list .restaurant-list-details {
   padding: 0 1.5em 1em 1.5em;
+  position: relative;
 }
 
 #restaurants-list p {
@@ -319,6 +323,30 @@ header {
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
+}
+
+.fav-star {
+  width: 22px;
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.fav-star img {
+  max-width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.fav-star--filled {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.fav-star.favourited .fav-star--filled {
+  opacity: 1;
 }
 
 /* ====================== Restaurant Details ====================== */
@@ -458,4 +486,99 @@ header {
 
 #restaurant-hours td {
   color: #666;
+}
+
+#review-form-wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding-bottom: 30px;
+}
+
+#review-form-wrap h2 {
+  margin-bottom: 0;
+  margin-top: 20px;
+}
+
+.input-group {
+  margin: 5px 0;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+  display: block;
+}
+
+.input-group input {
+  padding: 5px;
+  width: 260px;
+}
+
+.input-group select {
+  width: 100px;
+  padding: 5px;
+}
+
+.input-group textarea {
+  width: 400px;
+  height: 100px;
+  resize: none;
+  max-width: 100%;
+}
+
+.input-group button {
+  padding: 5px 15px;
+  font-size: 1.1em;
+  display: inline-block;
+}
+
+.input-group.submit {
+  max-width: 405px;
+  text-align: right;
+  margin-top: 10px;
+}
+
+#review-form-wrap .row .input-group {
+  margin-right: 30px;
+}
+
+#alert-dialog {
+  position: fixed;
+  bottom: 0;
+  left: 40px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid;
+  z-index: 11;
+  will-change: transform;
+  transform: translateY(100%);
+  transition: transform 0.6s ease;
+}
+
+#alert-dialog.in {
+  transform: translateY(-20px);
+}
+
+#alert-dialog.secondary {
+  background-color: #e2e3e5;
+  border-color: #d6d8db;
+  color: #383d41;
+}
+
+#alert-dialog.success {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
+}
+
+#alert-dialog.primary {
+  background-color: #cce5ff;
+  border-color: #b8daff;
+  color: #004085;
+}
+
+#alert-dialog.danger {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
 }

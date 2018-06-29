@@ -65,12 +65,15 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
 
+  const restaurantIdField = document.getElementById("restaurant-id-field");
+  restaurantIdField.value = restaurant.id;
+
   // fill operating hours
   if (restaurant.operating_hours) {
     fillRestaurantHoursHTML();
   }
   // fill reviews
-  fillReviewsHTML();
+  fetchReviews();
 }
 
 /**
@@ -91,6 +94,13 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
 
     hours.appendChild(row);
   }
+}
+
+fetchReviews = () => {
+  DBHelper.fetchReviewsForRestaurant(self.restaurant.id, (error, reviews) => {
+    fillReviewsHTML(reviews);
+  });
+
 }
 
 /**
@@ -132,7 +142,7 @@ createReviewHTML = (review) => {
 
   const date = document.createElement('p');
   date.className = "review-date";
-  date.innerHTML = review.date;
+  date.innerHTML = review.createdAt;
   meta.appendChild(date);
 
   const rating = document.createElement('p');
@@ -172,3 +182,5 @@ getParameterByName = (name, url) => {
     return '';
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
+
+var form = new offlineForm;
